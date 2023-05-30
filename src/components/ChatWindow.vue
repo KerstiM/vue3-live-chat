@@ -4,6 +4,7 @@
     <div
       v-if="documents"
       class="messages"
+      ref="messages"
     >
       <div
         v-for="doc in formattedDocuments"
@@ -21,7 +22,7 @@
 <script>
 import getCollection from '../composables/getCollection'
 import { formatDistanceToNow } from 'date-fns'
-import { computed } from 'vue'
+import { computed, onUpdated, ref } from 'vue'
 
 export default {
   setup() {
@@ -37,7 +38,14 @@ export default {
       }
     })
 
-    return { error, documents, formattedDocuments }
+    // auto-scroll to the last messages
+    const messages = ref(null)
+
+    onUpdated(() => {
+      messages.value.scrollTop = messages.value?.scrollHeight
+    })
+
+    return { error, documents, formattedDocuments, messages }
   }
 }
 </script>
@@ -60,7 +68,7 @@ export default {
     font-weight: bold;
     margin-right: 6px;
   }
-  .message {
+  .messages {
     max-height: 400px;
     overflow: auto;
   }
