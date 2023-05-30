@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import NewChatForm from '@/components/NewChatForm.vue';
-import Navbar from '@/components/Navbar.vue';
-import getUser from '@/composables/getUser';
+import NewChatForm from '../components/NewChatForm.vue';
+import Navbar from '../components/Navbar.vue';
+import getUser from '../composables/getUser';
 import { watch } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -26,7 +26,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
